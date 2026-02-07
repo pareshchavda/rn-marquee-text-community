@@ -1,7 +1,6 @@
-```markdown
 # React Native Marquee Text 🚀
 
-![Horizontal and Vertical Marquee Demo](demo-combined.gif)
+![Horizontal and Vertical Marquee Demo](rn-marquee-text.gif)
 
 [![Try it on Expo Snack](https://img.shields.io/badge/Try%20it-Expo%20Snack-4630EB?style=for-the-badge&logo=expo)](https://snack.expo.dev/@pareshchavda/rn-marquee-text)
 
