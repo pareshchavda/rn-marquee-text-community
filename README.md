@@ -1,146 +1,169 @@
-# rn-marquee-text
+```markdown
+# React Native Marquee Text 🚀
 
-A highly customizable package for smooth, auto-scrolling marquee text components in React Native apps. Works seamlessly in both React Native CLI and Expo environments.
+![Horizontal and Vertical Marquee Demo](demo-combined.gif)
 
-![npm version](https://img.shields.io/npm/v/rn-marquee-text.svg)
-![license](https://img.shields.io/npm/l/rn-marquee-text.svg)
-![downloads](https://img.shields.io/npm/dm/rn-marquee-text.svg)
+[![Try it on Expo Snack](https://img.shields.io/badge/Try%20it-Expo%20Snack-4630EB?style=for-the-badge&logo=expo)](https://snack.expo.dev/@pareshchavda/rn-marquee-text)
 
-## 🚀 Features
+## Features ✨
 
-- ⚡ Smooth scrolling powered by React Native Reanimated
-- 🧩 Fully compatible with React Native & Expo
-- 🔁 Supports loop and bounce animation modes
-- 🎛️ Customizable speed, delay, and styles
-- 📱 No dependencies except Reanimated
-- 📏 Auto-detects overflow for auto-scrolling
-- ↔️ Supports horizontal and vertical scrolling
-- 📰 Built-in MarqueeText for ticker-style effects
+- **Multi-directional scrolling**: Horizontal and vertical marquee effects
+- **Animation modes**: Loop and bounce animations
+- **Performance optimized**: Built with React Native Reanimated 3
+- **Customizable**: Control speed, delay, spacing, and more
+- **Flexible content**: Supports both text and custom components
+- **TypeScript ready**: Complete type definitions included
 
-## 📦 Installation
+## Installation 📦
 
 ```bash
-# React Native CLI
+# Using npm
 npm install rn-marquee-text react-native-reanimated
 
-# OR using yarn
+# Using yarn
 yarn add rn-marquee-text react-native-reanimated
 ```
 
-### Expo Users
+### Peer Dependencies
+Ensure you've properly installed and configured:
+- [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation)
 
-```bash
-expo install react-native-reanimated
-```
+## Usage 🚀
 
-Then update your `babel.config.js`:
-
-```js
-module.exports = {
-  presets: ['babel-preset-expo'],
-  plugins: ['react-native-reanimated/plugin'],
-};
-```
-
-## 🧱 Components
-
-### 1️⃣ AutoScroll — Scroll any overflowed content
-
-#### Basic Usage
-
-```tsx
-import AutoScroll, { AnimationMode } from 'rn-marquee-text';
-
-const Example = () => (
-  <AutoScroll 
-    style={{ height: 100, width: '100%' }}
-    mode={AnimationMode.LOOP}
-    speed={40}
-  >
-    This is a long text that will scroll if it overflows its container.
-  </AutoScroll>
-);
-```
-
-#### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | ReactNode | (required) | Content to scroll |
-| mode | 'loop' \| 'bounce' | 'loop' | Animation type |
-| speed | number | 30 | Speed in px/sec |
-| delay | number | 1500 | Delay before animation starts |
-| endPauseDuration | number | 1000 | Pause time at edges (for bounce mode) |
-| style | ViewStyle | {} | Container styling |
-| textStyle | TextStyle | {} | Text styling (when children is string) |
-| enabled | boolean | true | Enable or disable animation |
-| direction | 'horizontal' \| 'vertical' | 'vertical' | Scroll direction |
-
-### 2️⃣ MarqueeText — For ticker-style text
-
-#### Basic Usage
-
-```tsx
-import { MarqueeText } from 'rn-marquee-text';
-import { View, Text } from 'react-native';
-
-const Example = () => (
-  <View style={{ width: '100%', borderRadius: 8, overflow: 'hidden' }}>
-    <MarqueeText
-      speed={100}
-      backgroundColor="#1a365d"
-      textColor="#f0f4f8"
-      fontSize={14}
-      direction="horizontal"
-    >
-      <Text>
-        Breaking News: This is a marquee text scrolling horizontally!
-      </Text>
-    </MarqueeText>
-  </View>
-);
-```
-
-#### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| text | string | (required) | Text to display (alternative to children) |
-| speed | number | 80 | Speed in px/sec |
-| backgroundColor | string | #000 | Marquee background color |
-| textColor | string | #fff | Text color |
-| fontSize | number | 16 | Font size |
-| paddingVertical | number | 8 | Vertical padding |
-| paddingHorizontal | number | 12 | Horizontal padding |
-| delay | number | 1000 | Delay before animation starts |
-| bounceMode | boolean | false | Whether to bounce at edges |
-| endPauseDuration | number | 2000 | Pause at each end (only in bounce mode) |
-
-## 💡 Advanced Examples
-
-### 🔁 AutoScroll with Custom Content
-
-```tsx
+### Basic Implementation
+```jsx
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import AutoScroll from 'rn-marquee-text';
+import { StyleSheet, View } from 'react-native';
+import { Marquee } from 'rn-marquee-text';
 
-const CardScroller = () => (
-  <AutoScroll style={styles.scrollContainer} direction="horizontal">
-    <View style={styles.contentContainer}>
-      {[1, 2, 3, 4, 5].map((item) => (
-        <View key={item} style={styles.card}>
-          <Text style={styles.cardText}>Card {item}</Text>
-        </View>
-      ))}
-    </View>
-  </AutoScroll>
+const App = () => (
+  <View style={styles.container}>
+    <Marquee
+      style={styles.marquee}
+      speed={40}
+      textStyle={styles.text}
+    >
+      Your scrolling text goes here
+    </Marquee>
+  </View>
 );
 
 const styles = StyleSheet.create({
-  scrollContainer: {
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  marquee: { height: 50, backgroundColor: '#f5f5f5', borderRadius: 8 },
+  text: { fontSize: 16, color: '#333' }
+});
+
+export default App;
+```
+
+## API Reference 📚
+
+### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | React.ReactNode | Required | Content to scroll (string or components) |
+| `mode` | 'loop' \| 'bounce' | 'loop' | Animation behavior |
+| `speed` | number | 30 | Pixels per second |
+| `direction` | 'horizontal' \| 'vertical' | 'horizontal' | Scroll direction |
+| `enabled` | boolean | true | Animation active state |
+| `delay` | number | 1500 | Initial delay (ms) before starting |
+| `endPauseDuration` | number | 1000 | Pause at end (bounce mode only) |
+| `gap` | number | 20 | Gap between repeating text loops |
+| `spacing` | number | 20 | **Deprecated**: Use `gap` instead |
+| `reverse` | boolean | false | Reverse the animation direction |
+| `backgroundColor` | string | 'transparent' | Background color for the container |
+| `frameRate` | number | - | Custom frame rate for animation |
+| `onAnimationStart` | function | - | Callback when animation starts |
+| `onAnimationStop` | function | - | Callback when animation stops |
+| `style` | ViewStyle | - | Container style |
+| `textStyle` | TextStyle | - | Text style (when children is a string) |
+
+### Methods (via ref)
+```jsx
+const marqueeRef = useRef();
+
+// Start animation
+marqueeRef.current?.start();
+
+// Stop animation
+marqueeRef.current?.stop();
+
+// Check if active
+const isActive = marqueeRef.current?.isActive;
+```
+
+## Examples 🎨
+
+### Comprehensive Demo Example
+```jsx
+import React from 'react';
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+import { AutoScroll, Marquee } from 'rn-marquee-text';
+
+export default function App() {
+  return (
+    <SafeAreaView style={{ flex: 1, padding: 16, gap: 24 }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Marquee Text Demo</Text>
+
+      <View style={{ borderRadius: 8, overflow: 'hidden' }}>
+        <Marquee speed={80}>
+          This is a long scrolling text that demonstrates the marquee functionality
+        </Marquee>
+      </View>
+
+      <View style={{ borderRadius: 8, overflow: 'hidden' }}>
+        <Marquee
+          speed={120}
+          backgroundColor="#1a365d"
+          textStyle={{ color: '#f0f4f8', fontSize: 14 }}
+        >
+          Faster scrolling example with different colors
+        </Marquee>
+      </View>
+
+      <View style={{ width: '100%', borderRadius: 8, overflow: 'hidden' }}>
+        <Marquee
+          speed={100}
+          backgroundColor="#7b341e"
+          textStyle={{ color: '#fffaf0', fontSize: 18 }}
+        >
+          Breaking News: This is a full-width marquee text component that scrolls horizontally
+        </Marquee>
+      </View>
+
+      <View style={{ marginVertical: 10, borderRadius: 8, overflow: 'hidden' }}>
+        <Marquee
+          speed={50}
+          backgroundColor="#fff"
+          textStyle={{ color: '#0000ff', fontSize: 16 }}
+        >
+          This text will scroll horizontally continuously
+        </Marquee>
+      </View>
+
+      <AutoScroll mode='loop' gap={50} style={styles.cardScroller} direction="horizontal">
+        <View style={styles.contentContainer}>
+          {[1, 2, 3, 4, 5].map((item) => (
+            <View key={item} style={styles.card}>
+              <Text style={styles.cardText}>Card {item}</Text>
+            </View>
+          ))}
+        </View>
+      </AutoScroll>
+      
+      <AutoScroll mode='loop' gap={50} style={styles.cardScroller} direction="horizontal">
+        <Text style={styles.cardText}>Legacy AutoScroll component with seamless loop 🎉</Text>
+      </AutoScroll>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  cardScroller: {
     height: 120,
     width: '100%',
+    marginTop: 10,
   },
   contentContainer: {
     flexDirection: 'row',
@@ -162,71 +185,29 @@ const styles = StyleSheet.create({
 });
 ```
 
-### 📰 News Ticker with MarqueeText
+## Troubleshooting 🛠️
 
-```tsx
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { MarqueeText } from 'rn-marquee-text';
+**Animation not working?**
+- Verify Reanimated installation
+- Check babel.config.js for Reanimated plugin
 
-const NewsTicker = () => (
-  <View style={styles.tickerContainer}>
-    <MarqueeText speed={70} bounceMode={false}>
-      <Text style={styles.cardText}>
-        BREAKING NEWS: Latest updates on global events. Markets reach all-time high.
-      </Text>
-    </MarqueeText>
-  </View>
-);
+**Text not visible?**
+- Ensure container has proper dimensions
+- Verify text color contrasts with background
 
-const styles = StyleSheet.create({
-  tickerContainer: {
-    width: '100%',
-    borderRadius: 4,
-    overflow: 'hidden',
-    marginVertical: 10,
-  },
-  cardText: {
-    fontSize: 14,
-    paddingHorizontal: 10,
-  },
-});
-```
+**Performance issues?**
+- Reduce animation speed
+- Simplify marquee content
+- Use `frameRate` prop to limit FPS
 
-## 🛠️ Tips for Optimal Performance
+## Contributing 🤝
+Contributions are welcome! Please:
+1. Open an issue to discuss changes
+2. Ensure tests are updated
+3. Maintain consistent code style
 
-- Match speed with content length for readability
-- Use delays to give users time to read before scrolling
-- Bounce mode is more attention-grabbing (e.g., for alerts)
-- Limit concurrent scroll components to avoid frame drops
-- Test on low-end devices for smooth performance
+## License 📄
+MIT © PareshChavda(https://github.com/pareshchavda)
 
-## 🧩 Troubleshooting
 
-### ❌ Text Not Scrolling?
 
-- Ensure content overflows the container
-- Confirm `enabled` is set to `true`
-- Use `overflow: 'hidden'` on container
-
-### 🐢 Choppy Animations?
-
-- Leverage `useNativeDriver` if supported
-- Minimize simultaneous animations
-- Simplify nested component structure
-
-## 📄 License
-
-MIT
-
-## 🤝 Contributing
-
-Pull requests welcome!
-
-Steps:
-
-1. Fork the repo
-2. Create a branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add some amazing feature'`
-4. Push the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
